@@ -8,5 +8,5 @@ window.Book = Backbone.Model.extend({
     picture: ''
   },
 
-  urlRoot: 'books/'
+  urlRoot: 'books'
 });
