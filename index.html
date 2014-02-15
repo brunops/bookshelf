@@ -5,18 +5,32 @@
   <title>Bookshelf</title>
 </head>
 <body>
+  <div id="sidebar"></div>
+
   <div id="content">
     <h1>Bookshelf</h1>
     <p>Welcome to Bookshelf, here you can manage your books :)</p>
   </div>
+
+  <!-- Templates -->
+  <script type="text/template" id="book-list-item-template">
+    <a href="#books/<%= id %>"><%= title %></a>
+  </script>
 
   <!-- Libraries -->
   <script src="js/libs/jquery.js"></script>
   <script src="js/libs/underscore.js"></script>
   <script src="js/libs/backbone.js"></script>
 
-  <!-- Specifics -->
+  <!-- Models -->
   <script src="js/models/Book.js"></script>
   <script src="js/models/BookCollection.js"></script>
+
+  <!-- Views -->
+  <script src="js/views/BookListItemView.js"></script>
+  <script src="js/views/BookListView.js"></script>
+
+  <!-- Hit start! -->
+  <script src="js/AppRouter.js"></script>
 </body>
 </html>
