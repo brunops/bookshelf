@@ -1,4 +1,8 @@
 window.AppRouter = Backbone.Router.extend({
+  initialize: function() {
+    this.showView('#header', new HeaderView());
+  },
+
   routes: {
     '': 'bookList'
   },
@@ -26,5 +30,5 @@ window.AppRouter = Backbone.Router.extend({
   }
 });
 
-new AppRouter();
+var app = new AppRouter();
 Backbone.history.start();

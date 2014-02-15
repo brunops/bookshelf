@@ -5,6 +5,8 @@
   <title>Bookshelf</title>
 </head>
 <body>
+  <div id="header"></div>
+
   <div id="sidebar"></div>
 
   <div id="content">
@@ -13,6 +15,10 @@
   </div>
 
   <!-- Templates -->
+  <script type="text/template" id="header-template">
+    <button class="new-btn">New Book</button>
+  </script>
+
   <script type="text/template" id="book-list-item-template">
     <a href="#books/<%= id %>"><%= title %></a>
   </script>
@@ -29,6 +35,7 @@
   <!-- Views -->
   <script src="js/views/BookListItemView.js"></script>
   <script src="js/views/BookListView.js"></script>
+  <script src="js/views/HeaderView.js"></script>
 
   <!-- Hit start! -->
   <script src="js/AppRouter.js"></script>
