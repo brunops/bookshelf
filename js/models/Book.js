@@ -1,5 +1,5 @@
 window.Book = Backbone.Model.extend({
-  initialize: function() {
+  defaults: {
     id: null,
     title: 'Unknown',
     author: 'Unknown',
