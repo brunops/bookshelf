@@ -23,6 +23,31 @@
     <a href="#books/<%= id %>"><%= title %></a>
   </script>
 
+  <script type="text/template" id="book-details-template">
+    <form action="">
+      <label for="id">Id</label>
+      <input name="id" id="id" type="text" value="<%= id %>" disabled>
+
+      <label for="title">Title</label>
+      <input name="title" id="title" type="text" value="<%= title %>">
+
+      <label for="author">Author</label>
+      <input name="author" id="author" type="text" value="<%= author %>">
+
+      <label for="edition">Edition</label>
+      <input name="edition" id="edition" type="text" value="<%= edition %>">
+
+      <label for="pages">Pages</label>
+      <input name="pages" id="pages" type="text" value="<%= pages %>">
+
+      <label for="picture">Picture</label>
+      <input name="picture" id="picture" type="text" value="<%= picture %>">
+
+      <input type="submit" value="Delete" class="delete">
+      <input type="submit" value="Save" class="save">
+    </form>
+  </script>
+
   <!-- Libraries -->
   <script src="js/libs/jquery.js"></script>
   <script src="js/libs/underscore.js"></script>
@@ -35,6 +60,7 @@
   <!-- Views -->
   <script src="js/views/BookListItemView.js"></script>
   <script src="js/views/BookListView.js"></script>
+  <script src="js/views/BookDetailsView.js"></script>
   <script src="js/views/HeaderView.js"></script>
 
   <!-- Hit start! -->
