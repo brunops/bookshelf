@@ -2,9 +2,9 @@ window.BookListView = Backbone.View.extend({
   tagName: 'ul',
 
   initialize: function() {
-    this.bind('change', this.render, this);
+    this.model.bind('change', this.render, this);
 
-    this.bind('add', function(book) {
+    this.model.bind('add', function(book) {
       this.$el.append( new BookListItemView({ model: book }) );
     }, this);
   },
