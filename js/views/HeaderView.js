@@ -14,6 +14,6 @@ window.HeaderView = Backbone.View.extend({
   },
 
   newBook: function() {
-    app.navigate('books/new');
+    app.navigate('books/new', true);
   }
 });
