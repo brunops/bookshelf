@@ -20,7 +20,7 @@ var server = http.createServer(function(req, res) {
 
     default:
       res.statusCode = 400;
-      return res.send('Error 400: Invalid HTTP method.');
+      return res.end('Error 400: Invalid HTTP method.');
   }
 
 });
