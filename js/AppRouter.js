@@ -4,7 +4,9 @@ window.AppRouter = Backbone.Router.extend({
   },
 
   routes: {
-    '': 'bookList'
+    '': 'showBooksList',
+    'books/new': 'newBook',
+    'books/:id': 'showBook'
   },
 
   showView: function(selector, view) {
@@ -13,7 +15,7 @@ window.AppRouter = Backbone.Router.extend({
     return view;
   },
 
-  bookList: function() {
+  showBooksList: function() {
     this.bookList = new BookCollection();
 
     var self = this;
@@ -26,7 +28,20 @@ window.AppRouter = Backbone.Router.extend({
         self.showView('#sidebar', bookList);
       }
     });
+  },
 
+  showBook: function(id) {
+    var book = this.bookList.get(id);
+    this.showView('#content', new BookDetailsView({
+      model: book
+    }));
+  },
+
+  newBook: function() {
+    var book = new Book();
+    this.showView('#content', new BookDetailsView({
+      model: book
+    }));
   }
 });
 
