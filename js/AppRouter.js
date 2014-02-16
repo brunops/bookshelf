@@ -1,10 +1,11 @@
 window.AppRouter = Backbone.Router.extend({
   initialize: function() {
     this.showView('#header', new HeaderView());
+    this.showBooksList();
   },
 
   routes: {
-    '': 'showBooksList',
+    '': 'showHome',
     'books/new': 'newBook',
     'books/:id': 'showBook'
   },
@@ -13,6 +14,10 @@ window.AppRouter = Backbone.Router.extend({
     $(selector).html(view.render());
 
     return view;
+  },
+
+  showHome: function() {
+    this.showView('#content', new StartView());
   },
 
   showBooksList: function() {
