@@ -18,6 +18,11 @@ var server = http.createServer(function(req, res) {
     case "POST":
       break;
 
+    case "DELETE":
+        res.writeHead({ 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true }));
+      break;
+
     default:
       res.statusCode = 400;
       return res.end('Error 400: Invalid HTTP method.');
