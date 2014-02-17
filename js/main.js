@@ -1,3 +1,12 @@
+Backbone.View.prototype.close = function() {
+  if (this.beforeClose) {
+    this.beforeClose();
+  }
+
+  this.remove();
+  this.unbind();
+};
+
 window.AppRouter = Backbone.Router.extend({
   initialize: function() {
     this.showView('#header', new HeaderView());

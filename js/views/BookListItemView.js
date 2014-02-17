@@ -5,7 +5,7 @@ window.BookListItemView = Backbone.View.extend({
     this.template = _.template( $('#book-list-item-template').html() );
 
     this.model.bind('change', this.render, this);
-    this.model.bind('remove', function() { this.$el.remove(); }, this);
+    this.model.bind('remove', this.close, this);
   },
 
   render: function() {
