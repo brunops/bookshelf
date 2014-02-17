@@ -10,7 +10,6 @@ Backbone.View.prototype.close = function() {
 window.AppRouter = Backbone.Router.extend({
   initialize: function() {
     this.showView('#header', new HeaderView());
-    this.showBooksList();
   },
 
   routes: {
@@ -26,36 +25,54 @@ window.AppRouter = Backbone.Router.extend({
   },
 
   showHome: function() {
-    this.showView('#content', new StartView());
+    this.before(function() {
+      this.showView('#content', new StartView());
+    }, this);
   },
 
-  showBooksList: function() {
-    this.bookList = new BookCollection();
+  before: function(callback, scope) {
+    scope = scope || this;
 
-    var self = this;
-    this.bookList.fetch({
-      success: function() {
-        var bookList = new BookListView({
-          model: self.bookList
-        });
-
-        self.showView('#sidebar', bookList);
+    if (this.bookList) {
+      if (callback) {
+        callback.call(scope);
       }
-    });
+    }
+    else {
+      this.bookList = new BookCollection();
+
+      this.bookList.fetch({
+        success: function() {
+          var bookList = new BookListView({
+            model: scope.bookList
+          });
+
+          scope.showView('#sidebar', bookList);
+
+          if (callback) {
+            callback.call(scope);
+          }
+        }
+      });
+    }
   },
 
   showBook: function(id) {
-    var book = this.bookList.get(id);
-    this.showView('#content', new BookDetailsView({
-      model: book
-    }));
+    this.before(function() {
+      var book = this.bookList.get(id);
+      this.showView('#content', new BookDetailsView({
+        model: book
+      }));
+    }, this);
   },
 
   newBook: function() {
-    var book = new Book();
-    this.showView('#content', new BookDetailsView({
-      model: book
-    }));
+    this.before(function() {
+      var book = new Book();
+      this.showView('#content', new BookDetailsView({
+        model: book
+      }));
+    }, this);
   }
 });
 
