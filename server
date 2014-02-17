@@ -1,3 +1,15 @@
 #!/bin/sh
 
-exec node app.js
+# start mongod
+mongod --dbpath ./data &
+mongoPID=$!
+
+# start node application
+node app.js
+
+# kill node
+kill $!
+
+# kill mongo
+kill $mongoPID
+
