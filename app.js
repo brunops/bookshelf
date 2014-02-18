@@ -26,7 +26,7 @@ var server = http.createServer(function(req, res) {
           });
         }
         else {
-          send(req, req.url).root(__dirname).pipe(res);
+          send(req, req.url).root(__dirname + '/public').pipe(res);
         }
         break;
 
