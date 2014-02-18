@@ -31,6 +31,20 @@ var server = http.createServer(function(req, res) {
         break;
 
       case "POST":
+        if (req.url === '/books') {
+          // Find next book id by looking at "counters" document
+          // and increment sequence by 1
+          db.get('counters').findAndModify({ _id: 'bookid' }, { $inc: { seq: 1 } }, function(e, docs) {
+            // Next integer id needs to be set in order for Backbone to work properly
+            body.id = docs.seq;
+
+            // Insert new book
+            db.get('bookcollection').insert(body, { safe: true }, function(e, docs) {
+              res.writeHead({ 'Content-Type': 'application/json' });
+              res.end(JSON.stringify(docs));
+            });
+          });
+        }
         break;
 
       case "DELETE":
