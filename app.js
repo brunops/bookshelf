@@ -9,31 +9,40 @@ var server = http.createServer(function(req, res) {
   console.log(req.method)
   console.log(req.url)
 
-  switch (req.method) {
-    case "GET":
-      if (req.url === '/books') {
-        db.get('bookcollection').find({}, {}, function(e, docs) {
+  var body = "";
+  req.on('data', function(chunk) {
+    body += chunk;
+  });
+
+  req.on('end', function() {
+    body = body ? JSON.parse(body) : '';
+
+    switch (req.method) {
+      case "GET":
+        if (req.url === '/books') {
+          db.get('bookcollection').find({}, {}, function(e, docs) {
+            res.writeHead({ 'Content-Type': 'application/json' });
+            res.end(JSON.stringify(docs));
+          });
+        }
+        else {
+          send(req, req.url).root(__dirname).pipe(res);
+        }
+        break;
+
+      case "POST":
+        break;
+
+      case "DELETE":
           res.writeHead({ 'Content-Type': 'application/json' });
-          res.end(JSON.stringify(docs));
-        });
-      }
-      else {
-        send(req, req.url).root(__dirname).pipe(res);
-      }
-      break;
+          res.end(JSON.stringify({ success: true }));
+        break;
 
-    case "POST":
-      break;
-
-    case "DELETE":
-        res.writeHead({ 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: true }));
-      break;
-
-    default:
-      res.statusCode = 400;
-      return res.end('Error 400: Invalid HTTP method.');
-  }
+      default:
+        res.statusCode = 400;
+        return res.end('Error 400: Invalid HTTP method.');
+    }
+  });
 
 });
 
