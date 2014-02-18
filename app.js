@@ -48,8 +48,16 @@ var server = http.createServer(function(req, res) {
         break;
 
       case "DELETE":
-          res.writeHead({ 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ success: true }));
+          // Match URL for /books/:id
+          var matches;
+          if (matches = req.url.match(/\/books\/(\d+)/)) {
+            db.get('bookcollection').remove({ id: parseInt(matches[1], 10) }, function(e, docs) {
+              console.log(docs)
+              res.writeHead({ 'Content-Type': 'application/json' });
+              res.end(JSON.stringify({ success: true }));
+            });
+          }
+
         break;
 
       default:
