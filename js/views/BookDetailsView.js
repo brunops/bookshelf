@@ -27,10 +27,11 @@ window.BookDetailsView = Backbone.View.extend({
       picture: $('#picture').val()
     });
 
+    var self = this;
     if (this.model.isNew()) {
       app.bookList.create(this.model, {
         success: function() {
-          app.navigate('books/' + this.model.get('id'));
+          app.navigate('books/' + self.model.get('id'));
         }
       });
     }
