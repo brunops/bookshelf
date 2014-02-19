@@ -6,9 +6,6 @@ var mongo = require('mongodb'),
     db = monk('localhost:27017/bookshelf');
 
 var server = http.createServer(function(req, res) {
-  console.log(req.method)
-  console.log(req.url)
-
   var body = "";
   req.on('data', function(chunk) {
     body += chunk;
